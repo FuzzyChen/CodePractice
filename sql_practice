@@ -43,9 +43,13 @@ Select S.name From (Students S join Friends F Using(ID)
          order by p2.salary
          ;
 
-/*value pair*/
+/*Write a query identifying the type of each record in the TRIANGLES table using its three side lengths.
+Output one of the following statements for each record in the table:*/
 
-Select distinct f1.x,f1.y from
-    (functions f1 join functions f2)
-    where f1.x = f2.y and f1.y = f2.x
-         ;
+Select case
+when A+B<=C or A+C<=B or B+C<=A then "Not A Triangle"
+when A=B and B=C then "Equilateral"
+when A=B or B=C or A=C then "Isosceles"
+else "Scalene"
+end
+from triangles;
