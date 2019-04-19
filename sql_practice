@@ -24,3 +24,28 @@ If two or more students both have names ending in the same last three characters
 
 select name from students where marks>75
 order by right(name,3),id asc;
+
+
+/*
+Write a query that prints a list of employee names
+(i.e.: the name attribute) from the Employee table in alphabetical order.
+*/
+select name from employee order by name;
+select name from employee where salary>2000 and months<10 order by employee_id asc;
+
+/*friend's salary higher*/
+
+
+Select S.name From (Students S join Friends F Using(ID)
+         join Packages p1 on S.id = p1.id
+         join Packages p2 on F.friend_id = p2.id)
+         where p2.salary>p1.salary
+         order by p2.salary
+         ;
+
+/*value pair*/
+
+Select distinct f1.x,f1.y from
+    (functions f1 join functions f2)
+    where f1.x = f2.y and f1.y = f2.x
+         ;
