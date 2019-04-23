@@ -64,4 +64,5 @@ Query the number of ocurrences of each occupation in OCCUPATIONS.
  select concat('There are a total of ',count(occupation)),lower(concat(occupation,'s.'))
  from occupations group by occupation order by count(occupation),occupation;
 
- 
+
+ select count(deptdesc) from deptinfo where deptdesc like ('e%');
