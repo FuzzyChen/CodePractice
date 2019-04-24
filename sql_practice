@@ -70,3 +70,10 @@ select * from trnsact where saledate between '2004-08-01' and '2004-08-10' order
 SELECT COUNT(DISTINCT Dog_Guid)
   FROM complete_tests
     where created_at>'2014-03-01';
+
+SELECT test_name, MONTH(created_at) AS Month, COUNT(created_at) AS Num_Completed_Tests
+    FROM complete_tests
+    WHERE MONTH(created_at)=11 OR MONTH(created_at)=12
+    GROUP BY 1, 2
+    HAVING COUNT(created_at)>=20
+    ORDER BY 3 DESC;
