@@ -65,4 +65,8 @@ Query the number of ocurrences of each occupation in OCCUPATIONS.
  from occupations group by occupation order by count(occupation),occupation;
 
 select count(deptdesc) from deptinfo where deptdesc like ('e%');
-select * from trnsact where saledate between '2004-08-01' and '2004-08-10' order by orgprice,sprice; 
+select * from trnsact where saledate between '2004-08-01' and '2004-08-10' order by orgprice,sprice;
+
+SELECT COUNT(DISTINCT Dog_Guid)
+  FROM complete_tests
+    where created_at>'2014-03-01';
