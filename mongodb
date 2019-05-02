@@ -1,0 +1,36 @@
+Problem 1:
+
+1)use restaurants
+db.restaurants.insertMany([{"name" : "A","cuisine":"bakery"}, ...{"name" : "B","cuisine":"hotpot"}]);
+2)db.restaurants.find()
+3)db.restaurants.find({},{"name": 1,"borough": 1,"cuisine": 1 })
+4)db.restaurants.find({},{"name": 1,"borough": 1,"cuisine": 1,"_id": 0 })
+5)db.restaurants.find({},{"name": 1,"borough": 1,"cuisine": 1,"_id": 0,"address.zipcode":1 })
+
+problem 2:
+
+1) use University
+2) db.Students.insertOne({“SID”:1, “Name”: “Nelson”, “Age”:25, “Major”:”Computer”, “Address”: {“Street”:”19 Liberty Avenue”, “City”:”Phoenix”, “State”:”AZ”}})
+3) db.Students.insertMany([{..}, {..}, {..}, {..}, {..}, {..}, {..}, {..}, {..}, {..}])
+4) db.Students.find()
+5) db.Students.find({“Age”:{“$gt”:15}})
+6) db.Students.find({“name”:{“$sort”}})
+db.Students.find().sort({“name”:1})
+7) db.Student.updateOne({“SID”:3},{“$set”:{“Major”:”Computer Science”}})
+
+
+
+Problem 3:
+
+2) db.people.updateMany({“Status”:”Marries”, “DoB.Month”:1}, {“$set”:{“DoB.Month”:”January”}})
+3) db.people.deleteMany({“Name”:”Nelson”})
+4) db.people.deleteMany({“Age”: {“$gt”:65}})
+5) db.people.updateMany({“Age”:25}, {“$inc”:{“Age”:1}})
+6) db.people.replaceOne({“Name”:”Nelson”, “Age”:25}, {“Name”:”Jason”})
+
+Problem 4:
+2) db.people.updateMany({“Age”:25}, {“$set”:{“Age”:27}})
+3) db.people.updateMany({“Name”:”Nelson”}, {“$unset”:{“Age”:1}})
+4) db.people.updateMany({“Name”:”Nelson”}, {“$push”: {“Contact”:{“Home page”:”www.com”}}})
+5) db.people.updateMany({“Name”:”Nelson”}, {“$push”:{“$each”:[“Physicists”, “Scientist”]}})
+6) db.people.updateMany({“Name”:”Nelson”}, {“$push”:{“Groups”:{“$each”:[1,2,3,4,5],”$slice”:-7, “$sort”:{“Group”:1}}})
