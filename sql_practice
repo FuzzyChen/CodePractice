@@ -100,3 +100,11 @@ The output column headers should be Doctor, Professor, Singer,
      ORDER BY Name
  ) a
  GROUP BY row;
+
+
+
+
+select COUNT(name) from CITY where population>100000;
+select avg(population) from city where district='California';
+/*round down: floor  round up: cell*/
+select floor(avg(population)) from city ;
