@@ -13,7 +13,6 @@ Input Format*/
 
 select distinct city from station where left(city,1) not in ('a','e','i','o','u');
 select distinct city from station where right(city,1) not in ('a','e','i','o','u');
-
 select distinct city from station where (left(city,1) not in ('a','e','i','o','u'))
 and (right(city,1) not in ('a','e','i','o','u'));
 
@@ -108,3 +107,34 @@ select COUNT(name) from CITY where population>100000;
 select avg(population) from city where district='California';
 /*round down: floor  round up: cell*/
 select floor(avg(population)) from city ;
+
+SELECT CEIL(AVG(Salary)-AVG(REPLACE(Salary,'0',''))) FROM EMPLOYEES;
+
+select  round(sum(lat_n),2),round(sum(long_w),2) from station;
+select round((lat_n),4) from station where lat_n>38.778 order by lat_n limit 1;
+select round(max(lat_n)+max(long_w)-min(lat_n)-min(long_w),4) from station;
+select round(sqrt(power(max(lat_n)-min(lat_n),2)+power(max(long_w)-min(long_w),2)),4) from station;
+
+select round(lat_n,4) from station order by lat_n limit 250;
+
+/*find median*/
+Select round(S.LAT_N,4) from station S where
+(select count(Lat_N) from station where Lat_N < S.LAT_N ) = (select count(Lat_N) from station where Lat_N > S.LAT_N)
+
+/*Join*/
+SELECT sum(city.population)
+FROM city
+JOIN country ON city.countrycode = country.code
+where country.continent = 'Asia';
+
+
+SELECT country.continent,floor(avg(city.population))
+FROM city
+JOIN country ON city.countrycode = country.code
+group by country.continent
+
+
+SELECT (CASE g.grade>=8 WHEN TRUE THEN s.name ELSE null END),g.grade,s.marks
+FROM students s
+INNER JOIN grades g ON s.marks BETWEEN min_mark AND max_mark
+ORDER BY g.grade DESC,s.name,s.marks;
