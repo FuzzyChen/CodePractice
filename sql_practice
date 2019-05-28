@@ -138,3 +138,18 @@ SELECT (CASE g.grade>=8 WHEN TRUE THEN s.name ELSE null END),g.grade,s.marks
 FROM students s
 INNER JOIN grades g ON s.marks BETWEEN min_mark AND max_mark
 ORDER BY g.grade DESC,s.name,s.marks;
+
+
+SELECT H.hacker_id,H.name,S1.score, max(S2.score)
+FROM Hackers H
+JOIN Submissions S1 ON H.hacker_id = S1.hacker_id
+join Submissions S2 ON S1.challenge_id = S2.submission_id
+group by H.hacker_id;
+
+
+UPDATE salary
+SET
+    sex = CASE sex
+        WHEN 'm' THEN 'f'
+        ELSE 'm'
+    END;
