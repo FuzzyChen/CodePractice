@@ -24,6 +24,50 @@ var threeSum = function (nums, target) {
     return res
 };
 
+
+var removeDuplicates = function (nums) {
+    let count = 0
+    let dic = {}
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === nums[i - 1]) {
+            nums.splice(i, 1)
+            i--
+        }
+    }
+    return nums
+};
+
 const nums = [-1, 2, 1, -4]
 console.log(threeSum(nums, 1))
+
+
+var validPalindrome = function (s) {
+    if (s === '') {
+        return true
+    }
+    let left = 0
+    let right = s.length - 1
+    while (left < right) {
+        if (s[left] === s[right]) {
+            left++
+            right--
+        } else {
+            return helper(left, right - 1) || helper(left + 1, right)
+        }
+    }
+    return true
+    function helper(l, r) {
+        while (l < r) {
+            if (s[l] === s[r]) {
+                l++
+                r--
+            } else {
+                return false
+            }
+        }
+        return true
+    }
+
+};
+
 
