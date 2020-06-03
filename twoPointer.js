@@ -1,20 +1,21 @@
-var threeSum = function (nums, target) {
+var threeSum = function (nums) {
     nums.sort((a, b) => (a - b))
-    const res = nums[0] + nums[1] + nums[2] - target
+    const res = []
     for (let i = 0; i < nums.length - 2; i++) {
         if (nums[i] === nums[i - 1]) {
             continue
         }
-        let left = i + 1; right = nums.length - 1
-        let temp
+        let left = i + 1
+        let right = nums.length - 1
+        let target = -nums[i]
+        console.log(left, right, target)
         while (left < right) {
-            temp = nums[i] + nums[left] + nums[right]
-            if (Math.abs(temp - target) < res) {
-                res = Math.abs(temp - target)
-                // while (left < right && nums[left] === nums[left + 1]) left++
-                // while (left < right && nums[right] === nums[right - 1]) right--
+            if (nums[left] + nums[right] === target) {
+                res.push([nums[i], nums[left], nums[right]])
+                while (left < right && nums[left] === nums[left + 1]) left++
+                while (left < right && nums[right] === nums[right - 1]) right--
             }
-            if (temp > target) {
+            if (nums[left] + nums[right] > target) {
                 right--
             } else {
                 left++
@@ -24,7 +25,35 @@ var threeSum = function (nums, target) {
     return res
 };
 
+var threeSumClosest = function (nums, target) {
+    nums.sort((a, b) => (a - b))
+    let res = nums[0] + nums[1] + nums[2] - target
 
+    for (let i = 0; i < nums.length - 2; i++) {
+        if (nums[i] === nums[i - 1]) {
+            continue
+        }
+        let left = i + 1; right = nums.length - 1
+
+        let temp
+        while (left < right) {
+            temp = nums[i] + nums[left] + nums[right]
+            // console.log(temp)
+            if (Math.abs(temp - target) < Math.abs(res)) {
+                res = temp - target
+                while (left < right && nums[left] === nums[left + 1]) left++
+                while (left < right && nums[right] === nums[right - 1]) right--
+            }
+            if (temp > target) {
+                right--
+            } else {
+                left++
+            }
+
+        }
+    };
+    return res + target
+}
 var removeDuplicates = function (nums) {
     let count = 0
     let dic = {}
@@ -70,4 +99,72 @@ var validPalindrome = function (s) {
 
 };
 
+var fourSum = function (nums, target) {
+    nums.sort((a, b) => (a - b))
+    const res = []
+    for (let i = 0; i < nums.length - 3; i++) {
+        if (nums[i] === nums[i - 1]) {
+            continue
+        }
+        for (let j = i + 1; j < nums.length - 2; j++) {
+            if (j > i + 1 && nums[j] === nums[j - 1]) {
+                continue
+            }
+            let left = j + 1
+            let right = nums.length - 1
+            // console.log(left, right, target)
+            while (left < right) {
 
+                if (nums[i] + nums[j] + nums[left] + nums[right] === target) {
+                    res.push([nums[i], nums[j], nums[left], nums[right]])
+                    while (left < right && nums[left] === nums[left + 1]) left++
+                    while (left < right && nums[right] === nums[right - 1]) right--
+                }
+                if (nums[i] + nums[j] + nums[left] + nums[right] > target) {
+                    right--
+                } else {
+                    left++
+                }
+            }
+        }
+    }
+    if (res.length === 0 && nums[0] + nums[1] + nums[2] + nums[3] === target) return [nums]
+    return res
+};
+
+var partition = function (head, x) {
+    const dummyLess = new ListNode();
+    const dummyMore = new ListNode();
+    let node = head;
+    let less = dummyLess;
+    let more = dummyMore;
+    while (node) {
+        if (node.val < x) {
+            less = less.next = node;
+        } else {
+            more = more.next = node;
+        }
+        node = node.next;
+    }
+    less.next = dummyMore.next;
+    more.next = null;
+    return dummyLess.next;
+};
+
+
+var mergeTwoLists = function (l1, l2) {
+    const dummy = new ListNode()
+    let temp = dummy
+    while (l1 && l2) {
+        if (l1.val >= l2.val) {
+            temp.next = l2
+            l2 = l2.next
+        } else {
+            temp.next = l1
+            l1 = l1.next
+        }
+        temp = temp.next
+    }
+    l1 ? temp.next = l1 : temp.next = l2;
+    return dummy.next
+};
