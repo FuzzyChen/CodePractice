@@ -159,3 +159,59 @@ class Solution:
             return
         self.last_node = root
         self.dfs(root.right)
+
+# dfs and stack
+
+
+class Solution:
+    def mergeTrees(self, t1: TreeNode, t2: TreeNode) -> TreeNode:
+        # End condition
+        if t1 is None:
+            return t2
+        if t2 is None:
+            return t1
+        t3 = TreeNode(t1.val + t2.val)
+        t3.left = self.mergeTrees(t1.left, t2.left)
+        t3.right = self.mergeTrees(t1.right, t2.right)
+        return t3
+
+
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        return self.pre(root)
+
+    def pre(self, root):
+        if not root:
+            return []
+
+        return [root.val] + self.pre(root.left) + self.pre(root.right)
+
+
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        if not root:
+            return []
+        res = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            res.append(node.val)
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+        return res
+
+
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        res = []
+        self.dfs(root, res)
+        return res
+
+    def dfs(self, root, res):
+        if not root:
+            return
+        self.dfs(root.left, res)
+        res.append(root.val)
+        self.dfs(root.right, res)

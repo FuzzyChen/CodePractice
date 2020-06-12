@@ -153,3 +153,20 @@ var mergeTwoLists = function (l1, l2) {
 };
 
 
+
+function meandering(arr) {
+    arr.sort((a, b) => a - b)
+    let left = 0
+    let right = arr.length - 1
+    let res = []
+    while (left < right) {
+        res.push(arr[right])
+        res.push(arr[left])
+        right--
+        left++
+    }
+    if (left === right) {
+        res.push(arr[left])
+    }
+    return res
+}
