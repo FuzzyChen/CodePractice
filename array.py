@@ -14,3 +14,21 @@ class Solution:
             if i+count < l and T[i+count] > T[i]:
                 res[i] = count
         return res
+
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ''
+        res = 0
+        minL = min([len(i) for i in strs])
+        print(minL)
+        while res < minL:
+            check = strs[0][res]
+            for i in strs:
+                if i[res] == check:
+                    continue
+                else:
+                    return strs[0][:res]
+            res += 1
+        return strs[0][:res]

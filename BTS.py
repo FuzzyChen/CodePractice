@@ -215,3 +215,46 @@ class Solution:
         self.dfs(root.left, res)
         res.append(root.val)
         self.dfs(root.right, res)
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+# 105. Construct Binary Tree from Preorder and Inorder Traversal
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        if not inorder:
+            return None
+        head = TreeNode(preorder[0])
+
+        index = inorder.index(head.val)
+        left_in = inorder[:index]
+        right_in = inorder[index+1:]
+        left_pre = preorder[1:index+1]
+        right_pre = preorder[index+1:]
+
+        head.left = self.buildTree(left_pre, left_in)
+        head.right = self.buildTree(right_pre, right_in)
+
+        return head
+# 124. Binary Tree Maximum Path Sum
+
+    def maxPathSum(self, root: TreeNode) -> int:
+        # post order traversal
+        if not root:
+            return 0
+        self.ans = root.val
+        self.dfs(root)
+        return self.ans
+
+    def dfs(self, root):
+        if not root:
+            return 0
+        left = max(0, self.dfs(root.left))
+        right = max(0, self.dfs(root.right))
+        self.ans = max(self.ans, left+right+root.val)
+        return max(left, right)+root.val
