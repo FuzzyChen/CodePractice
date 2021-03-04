@@ -258,3 +258,24 @@ class Solution:
         right = max(0, self.dfs(root.right))
         self.ans = max(self.ans, left+right+root.val)
         return max(left, right)+root.val
+
+# 99 BTS
+
+
+def recoverTree(self, root: TreeNode) -> None:
+        """
+        inorder traversal --- sort --- change the val
+        """
+        list_val, list_node = [], []
+        self.inorder(root, list_val, list_node)
+        list_val.sort()
+        for i in range(len(list_node)):
+            list_node[i].val = list_val[i]
+
+    def inorder(self,root,list_val,list_node):
+        if not root:
+            return
+        self.inorder(root.left,list_val,list_node)
+        list_val.append(root.val)
+        list_node.append(root)
+        self.inorder(root.right,list_val,list_node)

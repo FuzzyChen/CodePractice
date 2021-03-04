@@ -52,3 +52,28 @@ class Solution:
         r = self.dfs(root.right)
         self.maxL = max(self.maxL, l+r)
         return 1+max(l, r)
+
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # find the deadlock
+        # dfs visit visited
+        # time limit
+        for node in range(numCourses):
+            if not self.dfs(node, prerequisites, {}):
+                return False
+        return True
+
+    def dfs(self, node, pre, rec):
+        if node in rec and rec[node] == 'visited':
+            return True
+        if node in rec and rec[node] == 'visiting':
+            return False
+        rec[node] = 'visiting'
+        for i in pre:
+            if i[0] == node:
+                if not self.dfs(i[1], pre, rec):
+                    return False
+        rec[node] = 'visited'
+
+        return True
