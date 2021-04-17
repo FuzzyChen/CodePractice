@@ -130,5 +130,86 @@ function remove_arr(array) {
     return res
 }
 
-console.log(remove_arr([1, 2, 3, 4, 5, 2, 2, 5, 6, 6]))
+// console.log(remove_arr([1, 2, 3, 4, 5, 2, 2, 5, 6, 6]))
 
+//这两题输入都比较简单  都只有一行 直接readline 就行
+// 我正准备把那个python版本转化一下
+// 试一下自测 输入 a2b2 输出
+
+function decodeString(str) {
+    let alpha = str.split(/[0-9]+/)
+    let num = str.split(/[a-zA-Z]+/)
+    alpha.splice(alpha.length - 1, 1)
+    num.splice(0, 1)
+    let record = []
+    for (let i = 0; i < alpha.length; i++) {
+        record.push([alpha[i], num[i]])
+    }
+    record.sort()
+    record.sort((a, b) => a[1] - b[1])
+    let res = ''
+    for (let dePair of record) {
+
+        let [char, times] = dePair
+        // console.log(dePair)
+        while (times > 0) {
+            res += char
+            times--  // 你这里打错了
+        }
+    }
+    return res
+}
+// print(decodeString(line))
+console.log(decodeString('b2a3'))
+
+
+
+var addBoldTag = function (s, dict) {
+    let res = ''
+    let marked = new Array(s.length).fill(false)
+    for (let word of dict) {
+        let start = s.indexOf(word)
+        let count = 1
+        while (start > -1) {
+            let end = start + word.length
+            for (let i = start; i < end; i++) {
+                marked[i] = true
+            }
+            count++
+            start = s.indexOf(word, count)
+        }
+    }
+    console.log(marked)
+    for (let i = 0; i < s.length; i++) {
+        if (marked[i] && (i === 0 || !marked[i - 1])) {
+            res += '<b>'
+        }
+        res += s[i]
+        if (marked[i] && (i === s.length - 1 || !marked[i + 1])) {
+            res += '</b>'
+        }
+
+    }
+    return res;
+};
+
+var findAnagrams = function (s, p) {
+    const res = []
+    const windowSize = p.length
+    const n = s.length
+    const windowArr = new Array(26).fill(0)
+    const sArr = new Array(26).fill(0)
+
+    for (let i in p) pWindow[p.charCodeAt(i) - 97]++;
+
+    const window = windowArr.join();
+    [...s].forEach((char, index) => {
+        if (index >= windowSize) {
+            let prevChar = s[index - windowSize]
+            sArr[prevChar.charCodeAt(0) - 97]--
+        }
+        sArr[char.charCodeAt(0) - 97]++
+        if (window === sArr.join()) res.push(index)
+    })
+    return res
+};

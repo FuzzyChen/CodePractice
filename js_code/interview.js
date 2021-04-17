@@ -96,3 +96,61 @@ class AlexaDevice {
 }
 
 const echo = new AlexaDevice('Echo', 10, true, true, true)
+
+
+
+// shopee
+// debounce
+function debounce(fn, threshold = 300) {
+    let timeout
+    return function () {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+            fn.apply(this, arguments)
+        }, threshold)
+    }
+}
+
+// use case
+
+// memoize
+function memoize(fn) {
+    const memo = {}
+    const memoRef = {}
+    return function () {
+
+        memoRef = arguments.then()
+        // let argumentRef = memoRef[arguments]
+        console.log(arguments)
+        let argumentRef = memoRef()
+        console.log(argumentRef)
+        if (argumentRef in memo) {
+            return memo[argumentRef]
+        } else {
+            memo[argumentRef] = fn.apply(this, arguments)
+            return memo[argumentRef]
+        }
+    }
+}
+
+const promiseA = new Promise(r => r(1));
+const promiseB = new Promise(r => r(2));
+const process = (p) => p.then(console.log);
+const mProcess = memoize(process);
+mProcess(promiseA);
+mProcess(promiseA);
+mProcess(promiseB);
+
+// CSS
+// SCSS
+// box model
+// span
+// width: 100px;
+// display: flex;
+// parent { display: flex; width: 100px; }
+// child1, child2, child3 { flex: 1; width: 20px; }
+// display: grid;
+
+
+
+

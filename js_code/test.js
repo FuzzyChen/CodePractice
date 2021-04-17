@@ -593,3 +593,25 @@ function subSequenceRemove(arr) {
 }
 let testArr = [3, 3, 5, 7, 5, 8]
 console.log(subSequenceRemove(testArr))
+
+
+var wordPattern = function (pattern, s) {
+    const sDic = {}
+    const patternDic = {}
+    const sArr = s.split(' ')
+    for (let index = 0; index < sArr.length; index++) {
+        if (pattern[index] in patternDic) {
+            if (sDic[sArr[index]] === pattern[index] && patternDic[pattern[index]] === sArr[index]) {
+                continue
+            } else {
+                return false
+            }
+        } else {
+            sDic[sArr[index]] = pattern[index]
+            patternDic[pattern[index]] = sArr[index]
+        }
+    }
+    console.log(sDic)
+    console.log(patternDic)
+    return true
+};
